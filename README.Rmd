@@ -35,6 +35,6 @@ remotes::install_githib("asiripanich/abs")
 library(abs)
 data_dir <- system.file("extdata", package = "abs")
 test_csv <- file.path(data_dir, "tb1.csv")
-mytable <- abs_read_tb(test_csv, exclude_total = TRUE)
+mytable <- abs_read_tb(test_csv, .names = "simplify", exclude_total = TRUE)
 mytable
 ```

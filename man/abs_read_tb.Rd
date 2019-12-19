@@ -4,10 +4,13 @@
 \alias{abs_read_tb}
 \title{Read tables exported from ABS Table Builder}
 \usage{
-abs_read_tb(x, exclude_total = TRUE)
+abs_read_tb(x, .names = c("asis", "simplify", "clean"), exclude_total = TRUE)
 }
 \arguments{
 \item{x}{path to a csv file exported from ABS Table Builder.}
+
+\item{.names}{Default as 'asis' returns names as is. "simplify" use
+only the abbreviations in small caps. While "clean" uses \code{janitor::clean_names()}.}
 
 \item{exclude_total}{exclude rows with Total}
 }

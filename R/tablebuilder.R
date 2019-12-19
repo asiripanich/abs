@@ -8,6 +8,8 @@
 #' column on the table and never the first.
 #'
 #' @param x path to a csv file exported from ABS Table Builder.
+#' @param .names Default as 'asis' returns names as is. "simplify" use
+#' only the abbreviations in small caps. While "clean" uses `janitor::clean_names()`.
 #' @param exclude_total exclude rows with Total
 #'
 #' @return a data.table
@@ -19,7 +21,9 @@
 #' test_csv <- file.path(data_dir, "tb1.csv")
 #' mytable <- abs_read_tb(test_csv)
 #'
-abs_read_tb  <- function(x, exclude_total = TRUE) {
+abs_read_tb  <- function(x, .names = c("asis", "simplify", "clean"), exclude_total = TRUE) {
+
+  .names <- match.arg(.names)
 
   first_n_lines <- 20
   top_lines <- readLines(x, n = first_n_lines)
@@ -59,6 +63,18 @@ abs_read_tb  <- function(x, exclude_total = TRUE) {
 
   if (exclude_total) {
     .data <- .data[rowSums(.data == "Total", na.rm = T) == 0, ]
+  }
+
+  if (.names == "clean") {
+    data.table::setnames(.data,
+             old = names(.data),
+             new = janitor::make_clean_names(names(.data)))
+  }
+
+  if (.names == "simplify") {
+    data.table::setnames(.data,
+                         old = names(.data),
+                         new = tolower(stringr::word(names(.data), 1)))
   }
 
   return(.data)

@@ -1,5 +1,7 @@
 #' @keywords internal
 #' @import data.table
+#' @importFrom janitor make_clean_names
+#' @importFrom stringr word
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage

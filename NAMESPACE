@@ -3,4 +3,6 @@
 export("%>%")
 export(abs_read_tb)
 import(data.table)
+importFrom(janitor,make_clean_names)
 importFrom(magrittr,"%>%")
+importFrom(stringr,word)

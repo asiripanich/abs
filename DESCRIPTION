@@ -13,7 +13,9 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 Imports: 
     data.table,
-    magrittr
+    magrittr,
+    janitor,
+    stringr
 RoxygenNote: 7.0.2
 Suggests: 
     testthat (>= 2.1.0)
