@@ -21,6 +21,12 @@ knitr::opts_chunk$set(
 
 The goal of abs is to provide a function to read csv tables downloaded from ABS TableBuilder without having to 'tidy' them first. Thus, this helps ti retain the meta information of the tables.
 
+## Table Builder
+
+Currently, The package only works with Table Builder files downloaded as "CSV String Value (.csv)", as shown in the image below.
+
+![pic](man/figures/download-tb-file.png)
+
 ## Installation
 
 You can install the development version of abs from GitHub with:
@@ -38,3 +44,10 @@ test_csv <- file.path(data_dir, "tb1.csv")
 mytable <- abs_read_tb(test_csv, .names = "simplify", exclude_total = TRUE)
 mytable
 ```
+
+Note that `abs_read_tb` returns a data.table object. To convert it back to data.frame simply use `as.data.frame()`.
+
+## Related packages
+
+- [readabs](https://github.com/MattCowgill/readabs): for reading time series data from ABS.
+- [stplanr](https://github.com/ropensci/stplanr): has a utility function, stplanr::read_table_builder(), for reading Table Builder files.

@@ -13,6 +13,13 @@ The goal of abs is to provide a function to read csv tables downloaded
 from ABS TableBuilder without having to ‘tidy’ them first. Thus, this
 helps ti retain the meta information of the tables.
 
+## Table Builder
+
+Currently, The package only works with Table Builder files downloaded as
+“CSV String Value (.csv)”, as shown in the image below.
+
+![pic](man/figures/download-tb-file.png)
+
 ## Installation
 
 You can install the development version of abs from GitHub with:
@@ -49,3 +56,14 @@ mytable
 #> 6: Families, Place of Usual Residence Six or more children in family  0.1763784
 #> 7: Families, Place of Usual Residence                 Not applicable 60.7814864
 ```
+
+Note that `abs_read_tb` returns a data.table object. To convert it back
+to data.frame simply use `as.data.frame()`.
+
+## Related packages
+
+  - [readabs](https://github.com/MattCowgill/readabs): for reading time
+    series data from ABS.
+  - [stplanr](https://github.com/ropensci/stplanr): has a utility
+    function, stplanr::read\_table\_builder(), for reading Table Builder
+    files.
