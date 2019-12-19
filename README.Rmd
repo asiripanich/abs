@@ -1,0 +1,40 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# abs
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+The goal of abs is to provide a function to read csv tables downloaded from ABS TableBuilder without having to 'tidy' it first. Thus, helps retain meta information of the tables.
+
+## Installation
+
+You can install the development version of abs from GitHub with:
+
+``` r
+remotes::install_githib("asiripanich/abs")
+```
+
+## Example
+
+```{r example}
+library(abs)
+data_dir <- system.file("extdata", package = "abs")
+test_csv <- file.path(data_dir, "tb1.csv")
+mytable <- abs_read_tb(test_csv, exclude_total = TRUE)
+mytable
+```

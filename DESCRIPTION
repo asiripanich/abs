@@ -1,0 +1,19 @@
+Package: abs
+Title: Read csv tables exported from ABS TableBuilder and ABS Census TableBuilder.
+Version: 0.0.1
+Authors@R: 
+    person(given = "Amarin",
+           family = "Siripanich",
+           email = "email@email.com",
+           role = c("aut", "cre"))
+Description: Read csv tables exported from ABS TableBuilder and ABS Census TableBuilder..
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+Imports: 
+    data.table,
+    magrittr
+RoxygenNote: 7.0.2
+Suggests: 
+    testthat (>= 2.1.0)

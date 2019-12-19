@@ -1,0 +1,65 @@
+#' Read tables exported from ABS Table Builder
+#'
+#' @description
+#' This provides an simple function to read in tables from Table Builder without
+#' having to 'tidy' the tables first. The basic idea is that the function looks
+#' for the first row that has its cell value equal to 'Count' which is what appeared
+#' in all Table Builder tables. The 'Count' cell usually appear in as the last
+#' column on the table and never the first.
+#'
+#' @param x path to a csv file exported from ABS Table Builder.
+#' @param exclude_total exclude rows with Total
+#'
+#' @return a data.table
+#' @export
+#'
+#' @examples
+#'
+#' data_dir <- system.file("extdata", package = "abs")
+#' test_csv <- file.path(data_dir, "tb1.csv")
+#' mytable <- abs_read_tb(test_csv)
+#'
+abs_read_tb  <- function(x, exclude_total = TRUE) {
+
+  first_n_lines <- 20
+  top_lines <- readLines(x, n = first_n_lines)
+  bottom_lines <- readLines(x, n = -first_n_lines)
+  has_count <- grepl(",\"Count\"", x = top_lines)
+
+  message("Attempting to read with fread.")
+  .data <- tryCatch(
+    fread(x),
+    warning = function(w) {
+      print(w)
+      message("")
+      message("'x' is not cleaned.")
+      FALSE
+    }
+  )
+  if (!is.data.table(.data)) {
+    if (sum(has_count) == 0) {
+      stop(paste0("Could not find the 'Count' column in the first ", first_n_lines, " lines."))
+    }
+    if (sum(has_count) > 1) {
+      stop(paste0("There are multiple 'Count' columns in the first ", {first_n_lines}, " lines."))
+    }
+
+    .data <- fread(x, skip = which(has_count), header = FALSE)
+    headers <- top_lines[has_count] %>%
+      gsub("\"", "", .) %>%
+      strsplit(., split = ",") %>%
+      unlist()
+
+    if (length(headers) != ncol(.data)) {
+      stop(paste0("The length of headers isn't equal to the number of columns in 'x'"))
+    }
+
+    names(.data) <- headers
+  }
+
+  if (exclude_total) {
+    .data <- .data[rowSums(.data == "Total", na.rm = T) == 0, ]
+  }
+
+  return(.data)
+}
