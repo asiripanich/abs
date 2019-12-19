@@ -10,8 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The goal of abs is to provide a function to read csv tables downloaded
-from ABS TableBuilder without having to ‘tidy’ it first. Thus, helps
-retain meta information of the tables.
+from ABS TableBuilder without having to ‘tidy’ them first. Thus, this
+helps ti retain the meta information of the tables.
 
 ## Installation
 
