@@ -28,38 +28,30 @@ abs_read_tb  <- function(x, .names = c("asis", "simplify", "clean"), exclude_tot
   first_n_lines <- 20
   top_lines <- readLines(x, n = first_n_lines)
   bottom_lines <- readLines(x, n = -first_n_lines)
-  has_count <- grepl(",\"Count\"", x = top_lines)
+  has_count <- grepl(",\"Count\"|,Count,|,Count$", x = top_lines)
 
-  message("Attempting to read with fread.")
-  .data <- tryCatch(
-    fread(x),
-    warning = function(w) {
-      print(w)
-      message("")
-      message("'x' is not cleaned.")
-      FALSE
-    }
-  )
-  if (!is.data.table(.data)) {
-    if (sum(has_count) == 0) {
-      stop(paste0("Could not find the 'Count' column in the first ", first_n_lines, " lines."))
-    }
-    if (sum(has_count) > 1) {
-      stop(paste0("There are multiple 'Count' columns in the first ", {first_n_lines}, " lines."))
-    }
-
-    .data <- fread(x, skip = which(has_count), header = FALSE)
-    headers <- top_lines[has_count] %>%
-      gsub("\"", "", .) %>%
-      strsplit(., split = ",") %>%
-      unlist()
-
-    if (length(headers) != ncol(.data)) {
-      stop(paste0("The length of headers isn't equal to the number of columns in 'x'"))
-    }
-
-    names(.data) <- headers
+  if (sum(has_count) == 0) {
+    stop(paste0("Could not find the 'Count' column in the first ", first_n_lines, " lines."))
   }
+  if (sum(has_count) > 1) {
+    stop(paste0("There are multiple 'Count' columns in the first ", {first_n_lines}, " lines."))
+  }
+
+  .data <- fread(x, skip = which(has_count), header = FALSE)
+  headers <- top_lines[has_count] %>%
+    gsub("\"", "", .) %>%
+    strsplit(., split = ",") %>%
+    unlist()
+
+  # remove rows that have any emptied cells or NAs
+  .data <-
+    .data[rowSums(is.na(.data) | .data == "") == 0]
+
+  if (length(headers) != ncol(.data)) {
+    stop(paste0("The length of headers isn't equal to the number of columns in 'x'"))
+  }
+
+  names(.data) <- headers
 
   if (exclude_total) {
     .data <- .data[rowSums(.data == "Total", na.rm = T) == 0, ]
