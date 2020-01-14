@@ -47,18 +47,6 @@ tb_range <- function(x) {
   x
 }
 
-#' remove overseas visitors
-#'
-#' @param x data.frame
-#'
-#' @return data.frame
-#' @export
-tb_remove_overseas_visitors <- function(x) {
-  checkmate::assert_data_frame(x, null.ok = FALSE)
-  x <- x[rowSums(x == "Overseas visitor") == 0]
-  return(x)
-}
-
 #' remove rows with 'value'
 #'
 #' @param x data.frame
@@ -66,7 +54,7 @@ tb_remove_overseas_visitors <- function(x) {
 #'
 #' @return data.frame
 #' @export
-tb_remove_row_with <- function(x, value) {
+tb_remove_rows_with <- function(x, value) {
   checkmate::assert_data_frame(x, null.ok = FALSE)
   if (!is.data.table(x))
     x <- as.data.table(x)
@@ -86,9 +74,9 @@ tb_remove_row_with <- function(x, value) {
 #' @export
 #'
 #' @examples
-tb_remove_row_where <- function(x, var, value) {
+tb_remove_rows_where <- function(x, var, value) {
   checkmate::assert_data_frame(x, null.ok = FALSE)
-  if (!x %has_name% var)
+  if (!checkmate::test_names(names(x), must.include = var))
     return(x)
   if (!is.data.table(x))
     x <- as.data.table(x)
