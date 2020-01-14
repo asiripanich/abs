@@ -6,7 +6,8 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![DOI](https://zenodo.org/badge/228950913.svg)](https://zenodo.org/badge/latestdoi/228950913)
 <!-- badges: end -->
 
 The goal of abs is to provide a function to read csv tables downloaded
@@ -30,18 +31,15 @@ remotes::install_githib("asiripanich/abs")
 
 ## Example
 
+The main function is `abs_read_tb()` which let you read in a
+TableBuilder file downloaded as “CSV String Value (.csv)” into a tidy
+data by ignoring all its metadata.
+
 ``` r
 library(abs)
 data_dir <- system.file("extdata", package = "abs")
 test_csv <- file.path(data_dir, "tb1.csv")
 mytable <- abs_read_tb(test_csv, .names = "simplify", exclude_total = TRUE)
-#> Attempting to read with fread.
-#> <simpleWarning in fread(x): Found and resolved improper quoting in first 100 rows. If the fields are not quoted (e.g. field separator does not appear within any field), try quote="" to avoid this warning.>
-#> 
-#> 'x' is not cleaned.
-#> Warning in fread(x, skip = which(has_count), header = FALSE): Previous fread()
-#> session was not cleaned up properly. Cleaned up ok at the beginning of this
-#> fread() call.
 #> Warning in fread(x, skip = which(has_count), header = FALSE): Stopped early on
 #> line 20. Expected 3 fields but found 0. Consider fill=TRUE and comment.char=.
 #> First discarded non-empty line: <<"Data Source: Census of Population and

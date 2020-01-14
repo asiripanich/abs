@@ -16,7 +16,8 @@ knitr::opts_chunk$set(
 # abs
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![DOI](https://zenodo.org/badge/228950913.svg)](https://zenodo.org/badge/latestdoi/228950913)
 <!-- badges: end -->
 
 The goal of abs is to provide a function to read csv tables downloaded from ABS TableBuilder without having to 'tidy' them first. Thus, this helps ti retain the meta information of the tables.
@@ -36,6 +37,8 @@ remotes::install_githib("asiripanich/abs")
 ```
 
 ## Example
+
+The main function is `abs_read_tb()` which let you read in a TableBuilder file downloaded as "CSV String Value (.csv)" into a tidy data by ignoring all its metadata.
 
 ```{r example}
 library(abs)
