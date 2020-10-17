@@ -33,7 +33,7 @@ tb_remove_totals <- function(x) {
 #'
 #' If the length of the vector is more than two then the vector gets returned.
 #'
-#' @param x
+#' @param x a numeric vector.
 #'
 #' @return
 #' @export
