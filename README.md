@@ -8,6 +8,8 @@
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![DOI](https://zenodo.org/badge/228950913.svg)](https://zenodo.org/badge/latestdoi/228950913)
+[![R build
+status](https://github.com/asiripanich/abs/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/abs/actions)
 <!-- badges: end -->
 
 The goal of abs is to provide a function to read csv tables downloaded
