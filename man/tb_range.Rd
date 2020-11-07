@@ -7,7 +7,7 @@
 tb_range(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{a numeric vector.}
 }
 \value{
 

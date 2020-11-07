@@ -33,12 +33,10 @@ tb_remove_totals <- function(x) {
 #'
 #' If the length of the vector is more than two then the vector gets returned.
 #'
-#' @param x
+#' @param x a numeric vector.
 #'
 #' @return
 #' @export
-#'
-#' @examples
 tb_range <- function(x) {
   if (length(x) == 2)
     return(x[[1]]:x[[2]])
@@ -72,8 +70,6 @@ tb_remove_rows_with <- function(x, value) {
 #'
 #' @return
 #' @export
-#'
-#' @examples
 tb_remove_rows_where <- function(x, var, value) {
   checkmate::assert_data_frame(x, null.ok = FALSE)
   if (!checkmate::test_names(names(x), must.include = var))
