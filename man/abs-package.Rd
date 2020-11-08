@@ -8,6 +8,13 @@
 \description{
 Read csv tables exported from ABS TableBuilder and ABS Census TableBuilder..
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/asiripanich/abs}
+}
+
+}
 \author{
 \strong{Maintainer}: Amarin Siripanich \email{email@email.com}
 
