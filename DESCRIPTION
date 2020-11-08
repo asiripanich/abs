@@ -12,12 +12,12 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 Imports: 
-    data.table,
-    magrittr,
-    janitor,
-    stringr,
-    checkmate
+    data.table (>= 1.13.0),
+    magrittr (>= 1.5.0),
+    checkmate (>= 2.0.0),
+    janitor (>= 2.0.1),
+    stringr (>= 1.4.0),
 RoxygenNote: 7.1.1
 Suggests: 
-    testthat (>= 2.1.0)
+    testthat (>= 3.0.0)
 URL: https://github.com/asiripanich/abs
