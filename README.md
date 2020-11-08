@@ -28,7 +28,7 @@ Currently, The package only works with Table Builder files downloaded as
 You can install the development version of abs from GitHub with:
 
 ``` r
-remotes::install_githib("asiripanich/abs")
+remotes::install_github("asiripanich/abs")
 ```
 
 ## Example
